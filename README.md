@@ -50,11 +50,11 @@ The script needs only Python 3.9+ and has no dependencies.
 
 | Button     | Key     | Flipper file              |
 |------------|---------|---------------------------|
-| Light      | `0xAFE` | `captures/light.sub`      |
-| Fan low    | `0xAFD` | `captures/fan_low.sub`    |
-| Fan medium | `0xAFB` | `captures/fan_medium.sub` |
-| Fan high   | `0xAF7` | `captures/fan_high.sub`   |
-| Fan off    | `0xAF1` | `captures/fan_off.sub`    |
+| Light      | `0xAFE` | `codes/light.sub`      |
+| Fan low    | `0xAFD` | `codes/fan_low.sub`    |
+| Fan medium | `0xAFB` | `codes/fan_medium.sub` |
+| Fan high   | `0xAF7` | `codes/fan_high.sub`   |
+| Fan off    | `0xAF1` | `codes/fan_off.sub`    |
 
 [PROTOCOL.md](PROTOCOL.md) documents the full frame layout and timings.
 
