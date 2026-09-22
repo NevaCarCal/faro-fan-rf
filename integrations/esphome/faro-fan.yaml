@@ -1,0 +1,63 @@
+# ESPHome config for the AS-3DN fan receiver (Faro Barcelona fans).
+# Hardware: ESP32 + a 315 MHz OOK/ASK transmitter module on GPIO4.
+# The codes below are for address 0xAF. Generate yours with:
+#   python3 tools/ht12.py esphome --address 0xNN --button <name>
+esphome:
+  name: faro-fan
+
+esp32:
+  board: esp32dev
+
+logger:
+api:
+ota:
+  - platform: esphome
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+remote_transmitter:
+  pin: GPIO4
+  carrier_duty_percent: 100%
+
+button:
+  - platform: template
+    name: "Light toggle"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [433, -866, 433, -433, 866, -866, 433, -433, 866, -866, 433, -866, 433, -866, 433, -866, 433, -866, 433, -866, 433, -866, 433, -433, 866, -15588]
+          repeat:
+            times: 10
+            wait_time: 0s
+  - platform: template
+    name: "Fan low"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [433, -866, 433, -433, 866, -866, 433, -433, 866, -866, 433, -866, 433, -866, 433, -866, 433, -866, 433, -866, 433, -433, 866, -866, 433, -15588]
+          repeat:
+            times: 10
+            wait_time: 0s
+  - platform: template
+    name: "Fan medium"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [433, -866, 433, -433, 866, -866, 433, -433, 866, -866, 433, -866, 433, -866, 433, -866, 433, -866, 433, -433, 866, -866, 433, -866, 433, -15588]
+          repeat:
+            times: 10
+            wait_time: 0s
+  - platform: template
+    name: "Fan high"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [433, -866, 433, -433, 866, -866, 433, -433, 866, -866, 433, -866, 433, -866, 433, -866, 433, -433, 866, -866, 433, -866, 433, -866, 433, -15588]
+          repeat:
+            times: 10
+            wait_time: 0s
+  - platform: template
+    name: "Fan off"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          code: [433, -866, 433, -433, 866, -866, 433, -433, 866, -866, 433, -866, 433, -866, 433, -866, 433, -433, 866, -433, 866, -433, 866, -866, 433, -15588]
+          repeat:
+            times: 10
+            wait_time: 0s
